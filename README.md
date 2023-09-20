@@ -26,3 +26,28 @@ and solve it as we did in the lectures. Give the final $\Theta$ complexity.
 
 Describe your reasoning and the conclusion you've come to. Your reasoning is the
 most important part. Add your answer to this markdown file.
+
+## Answer
+
+Since the function stops when the array size is 1 or less,
+
+`T(n) = 1      if n <= 1`
+
+Since I am splitting up the array into thirds and then running three sorts,
+
+`T(n) = 3T(n / 3)      if n > 1`
+
+We can solve this relation to find the time complexity:
+```
+T(n) = 3T(n / 3)
+     = 3(3T(n / 9))
+     = 9T(n / 9)
+     = 27T(n / 27)
+     = 2^i*T(n / 2^i)          where i = log n
+     = n*T(n / n)
+     = n*T(1)
+     = n
+```
+Therefore, the time complexity of this algorithm is $\Theta$(n).
+
+
