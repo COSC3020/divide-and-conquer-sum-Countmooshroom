@@ -33,19 +33,21 @@ Since the function stops when the array size is 1 or less,
 
 `T(n) = 1      if n <= 1`
 
-Since I am splitting up the array into thirds and then running three sorts,
+I am splitting up the array into thirds and then calling the function again three times.  After looking at some other students' projects, especially the one by Dhruv8806, I added a +3 at the end that I was origianlly missing since each run through does three adding operations.
 
-`T(n) = 3T(n / 3)      if n > 1`
+`T(n) = 3T(n / 3) + 3      if n > 1`
 
-We can solve this relation to find the time complexity:
+We can solve this relation to find the time complexity.  I also corrected this from the original by fixing some of the algebra:
 ```
-T(n) = 3T(n / 3)
-     = 3(3T(n / 9))
-     = 9T(n / 9)
-     = 27T(n / 27)
-     = 2^i*T(n / 2^i)          where i = log n
-     = n*T(n / n)
-     = n*T(1)
+T(n) = 3T(n / 3) + 3
+     = 3(3T(n / 9) + 3) + 3
+     = 9T(n / 9) + 6
+     = 27T(n / 27) + 9
+     = 3^i*T(n / 3^i) + 3i          where i = log n  (with a base 3)
+     = n*T(n / n) + 3log(n)
+     = n*T(1) + 3log(n)
+     = n + 3log(n)
+     Remove unnecessary terms
      = n
 ```
 Therefore, the time complexity of this algorithm is $\Theta$(n).
